@@ -1,0 +1,39 @@
+angular.module('loginService', [])
+
+	.factory('Login', function($http) {
+
+		return {
+			log : function(loginForm) {
+				return $http({
+					method: 'POST',
+					url: '/login',
+					headers: {'Content-Type' : 'application/json'},
+					data: loginForm
+				});
+
+			},
+			logout : function() {
+
+				return $http.get('/logout');
+			},
+			resetMail : function(mailPassReset) {
+				return $http({
+					method : 'POST',
+					url : '/password/reset/mail',
+					headers : {'Content-Type' : 'application/json'},
+					data : mailPassReset
+				});
+			},
+			resetPassword : function(resetForm) {
+				return $http({
+					method : 'POST',
+					url : '/password/reset/new',
+					headers : {'Content-Type' : 'application/json'},
+					data : resetForm
+				})
+			}
+
+		}
+
+	});
+	
