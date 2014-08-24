@@ -11,6 +11,7 @@ module.exports = function(app, passport) {
 			}
 
 			if (!user) {
+				res.statusCode = 401;
 				return res.send({ success: false, message: info.message});
 			}
 
@@ -26,6 +27,7 @@ module.exports = function(app, passport) {
             }
 
             if (!user) {
+            	res.statusCode = 401;
                 return res.send({success: false, message: info.message});
             }
 
