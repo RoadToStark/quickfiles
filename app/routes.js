@@ -1,9 +1,34 @@
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
 	// server routes ===========================================================
 
-	// Example route 
+	// Authentication
+	app.post('/login', function(req, res) {
+		// Handle login post here
+	});
+
+	app.post('/signup', function(req, res, next) {
+        passport.authenticate('local-signup', function(err, user, info) {
+
+            if (err) {
+                return next(err);
+            }
+
+            if (!user) {
+                return res.send({success: false, message: info.message});
+            }
+
+            return res.send({success: true, user: user});
+        })(req, res, next);
+    });
+
+	app.get('/logout', function(req, res) {
+		req.logout();
+	});
+
+
+	// Users
 	app.get('/users', function(req, res) {
 		User.find(function(err, users) {
 			if (err) {

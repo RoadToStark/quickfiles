@@ -1,5 +1,5 @@
 // Databases configuration
 
 module.exports = {
-	url: 'mongod://localhost/quickfiles'
+	url: 'mongodb://localhost/quickfiles'
 };
