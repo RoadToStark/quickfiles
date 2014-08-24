@@ -1,59 +1,54 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>QuickFiles</title>
+	<head>
+		<meta charset="UTF-8">
+		<title>QuickFiles</title>
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+		<!-- CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 
-	<!-- test with polymer material design -->
-	<link rel="import" href="components/paper-elements/paper-elements.html">
-	<script src="bower_components/platform/platform.js"></script>
+		<!-- JS -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular.min.js"></script> <!-- load angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-route.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-cookies.js"></script>
 
-	<!-- JS -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular.min.js"></script> <!-- load angular -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-route.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-cookies.js"></script>
+		<script src="assets/js/controllers/mainCtrl.js"></script> 
+		<script src="assets/js/services/fileService.js"></script> 
 
-	<script src="assets/js/controllers/mainCtrl.js"></script> 
-	<script src="assets/js/services/fileService.js"></script> 
+		<script src="assets/js/controllers/userCtrl.js"></script> 
+		<script src="assets/js/services/userService.js"></script> 
 
-	<script src="assets/js/controllers/userCtrl.js"></script> 
-	<script src="assets/js/services/userService.js"></script> 
-
-	<script src="assets/js/controllers/loginCtrl.js"></script> 
-	<script src="assets/js/services/loginService.js"></script> 
-
+		<script src="assets/js/controllers/loginCtrl.js"></script> 
+		<script src="assets/js/services/loginService.js"></script> 
 
 		<!-- load our application -->
-	    <script src="assets/js/app.js"></script> 
+		<script src="assets/js/app.js"></script> 
+		
+	</head>
 
-</head>
+	<body class="container" ng-app="quickfiles">
 
-<body class="container" ng-app="quickfiles">
-
-	<div class='navbar'>
-	 <div class='navbar-inner'>
-	    <div class='container-fluid'>
-	        <a class='brand'>quickfiles</a>
-	        <form class="navbar-search pull-right">
-	            <input type="text" class="span2" placeholder="Login">
-	            <input type="text" class="span2" placeholder="Password">
-	            <input type="submit" value="Login" class="btn"/>
-	        </form>
-	     </div>
-	  </div>
-	</div>
-
-	<div class="col-md-8 col-md-offset-2">
-		<!-- Main content and injected views -->
-		<div id="main">
-			<div ng-view></div>
+		<div class='navbar'>
+		 <div class='navbar-inner'>
+		    <div class='container-fluid'>
+		        <a class='brand' href="#">Quickfiles</a>
+		        <form class="navbar-search pull-right" ng-submit="Log()">
+		            <input type="text" class="span2" ng-model="loginForm.email" placeholder="Login">
+		            <input type="password" class="span2" ng-model="loginForm.password" placeholder="Password">
+		            <input type="submit" value="Login" class="btn"/>
+		        </form>
+		     </div>
+		  </div>
 		</div>
 
-	</div>
-</body>
+		<div class="col-md-8 col-md-offset-2">
+			<!-- Main content and injected views -->
+			<div id="main">
+				<div ng-view></div>
+			</div>
+
+		</div>
+	</body>
 </html>
 	

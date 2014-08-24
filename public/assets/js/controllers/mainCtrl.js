@@ -55,8 +55,7 @@ angular.module('mainCtrl', [])
                 });
         };
 
-		// function to handle deleting a comment
-		// DELETE A COMMENT ====================================================
+		// DELETE A FILE =================================
 		$scope.deleteFile = function(id) {
 			$scope.loading = true; 
 

@@ -44,7 +44,7 @@ quickfiles.config(function($routeProvider,$locationProvider) {
 		});
 
 });
-.factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
+quickfiles.factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
     return {
         response: function(response){
             if (response.status === 401) {

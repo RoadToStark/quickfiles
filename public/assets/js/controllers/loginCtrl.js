@@ -1,7 +1,7 @@
 
 angular.module('loginCtrl', [])
 
-	.controller('loginController', function($scope, $http, Login,$location) {
+	.controller('loginController', function($scope, $http, Login, Signup, $location) {
 
 		$scope.loginForm = {};
 
@@ -54,7 +54,7 @@ angular.module('loginCtrl', [])
         		});
         };
 
-        //function to get the token from the reset link
+        //function to get the token from the reset link depends on the way we'll reset passwords
         $scope.GetToken = function() {
         	$scope.location = $location;
     		$scope.$watch('location.search()', function() {
@@ -66,7 +66,22 @@ angular.module('loginCtrl', [])
 		    }
 		    console.log($scope.token);
         };
-        $scope.GetToken();
+        //$scope.GetToken();
+
+        $scope.Signup = function() {
+            $scope.loading = true;
+
+            Signup.request($scope.signupForm)
+                .success(function(data) {
+                    $scope.loading = false;
+                    document.location.href = '/';
+                })
+                .error(function(data) {
+                    console.log(data);
+                    $scope.errormsg = 'Mauvais Identifiant/Mot de passe';
+                });
+
+        };
 
 	});
 	

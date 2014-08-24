@@ -1,12 +1,12 @@
-angular.module('loginService', [])
+loginService = angular.module('loginService', [])
 
-	.factory('Login', function($http) {
+	loginService.factory('Login', function($http) {
 
 		return {
 			log : function(loginForm) {
 				return $http({
 					method: 'POST',
-					url: '/login',
+					url: '/api/login',
 					headers: {'Content-Type' : 'application/json'},
 					data: loginForm
 				});
@@ -33,6 +33,20 @@ angular.module('loginService', [])
 				})
 			}
 
+		}
+
+	});
+	loginService.factory('Signup', function($http) {
+
+		return {
+			request : function(signupForm) {
+				return $http({
+					method: 'POST',
+					url: '/api/signup',
+					headers: {'Content-Type' : 'application/json'},
+					data: signupForm
+				});
+			}
 		}
 
 	});

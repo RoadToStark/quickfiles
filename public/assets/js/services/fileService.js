@@ -7,7 +7,6 @@ angular.module('fileService', [])
 			get : function() {
 				return $http.get('/files');
 			},
-
 			// Uploads a new file to the db
 			upload : function(file) {
 				return $http({
