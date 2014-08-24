@@ -4,8 +4,18 @@ module.exports = function(app, passport) {
 	// server routes ===========================================================
 
 	// Authentication
-	app.post('/login', function(req, res) {
-		// Handle login post here
+	app.post('/login', function(req, res, next) {
+		passport.authenticate('local-login', function(err, user, info) {
+			if (err) {
+				return next(err);
+			}
+
+			if (!user) {
+				return res.send({ success: false, message: info.message});
+			}
+
+			return res.send({success: true, user: user});
+		})(req, res, next);
 	});
 
 	app.post('/signup', function(req, res, next) {
@@ -46,3 +56,4 @@ module.exports = function(app, passport) {
 	})
 
 };
+
