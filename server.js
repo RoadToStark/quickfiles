@@ -30,7 +30,9 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 mongoose.connect(db.url);
 
 // routes ==================================================
-require('./app/routes')(app, passport); // configure our routes
+var router = express.Router();
+require('./app/routes')(router, passport); // configure our routes
+app.use('/api', router);
 
 
 // start app ===============================================
