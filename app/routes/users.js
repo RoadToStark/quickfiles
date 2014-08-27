@@ -35,8 +35,13 @@ module.exports = function(router) {
 					res.send(err);
 				}
 
-				user.local.email = req.body.email;
-				user.username = req.body.username;
+				if (req.body.email) {
+					user.local.email = req.body.email;
+				}
+
+				if (req.body.username) {
+					user.username = req.body.username;
+				}
 
 				user.save(function(err) {
 					if (err) {

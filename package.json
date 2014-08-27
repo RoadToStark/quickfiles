@@ -9,6 +9,7 @@
 		"method-override" : "~2.0.2",
 		"passport" : "~0.1.17", 		
     	"passport-local" : "~0.1.6",
-    	"bcrypt-nodejs" : "latest"	    
+    	"bcrypt-nodejs" : "latest",
+    	"formidable" : "latest"	    
 	}
 }
