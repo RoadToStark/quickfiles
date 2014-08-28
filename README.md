@@ -74,11 +74,14 @@ Réponse success (l'objet file)
 Réponse erreur (exemple)
 ```
 {
-    "message": "Cast to ObjectId failed for value \"53ff8395fb505e7e5ff4\" at path \"_id\"",
-    "name": "CastError",
-    "type": "ObjectId",
-    "value": "53ff8395fb505e7e5ff4",
-    "path": "_id"
+    "success" : false,
+    error: {
+        "message": "Cast to ObjectId failed for value \"53ff8395fb505e7e5ff4\" at path \"_id\"",
+        "name": "CastError",
+        "type": "ObjectId",
+        "value": "53ff8395fb505e7e5ff4",
+        "path": "_id"
+    }
 }
 ```
 
