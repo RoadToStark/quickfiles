@@ -61,6 +61,7 @@ Réponse success (l'objet file)
 
 ```
 {
+    "link": "http://quickfil.es/ef9898dfg0877jfh765",
     "path": "media/53fa11e5d83a0bcb1b4682d1/53ff9af79ab6d077521c8b74.JPG",
     "size": 2003403,
     "lastModified": "2014-08-28T21:24:20.301Z",
