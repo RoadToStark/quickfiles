@@ -61,7 +61,7 @@ module.exports = function(router) {
 					res.send(err);
 				}
 
-				res.json({ message: 'User successfully deleted'});
+				res.json({ success: true, message: 'User successfully deleted'});
 			});
 		});
 

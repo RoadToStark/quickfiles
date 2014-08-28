@@ -29,3 +29,7 @@ node_modules
 
 # Webstorm
 .idea
+
+# Upload
+
+media
