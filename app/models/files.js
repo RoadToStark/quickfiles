@@ -9,7 +9,8 @@ var fileSchema = mongoose.Schema({
 	size: Number,
 	path: String,
 	lastModified: Date,
-	owner: String
+	owner: String,
+	link: String
 
 });
 

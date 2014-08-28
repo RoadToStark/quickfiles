@@ -37,11 +37,18 @@ module.exports = function(router) {
 			})
 		});
 
-	router.route('/files/:file_id')
-
+	router.route('/:file_id')
 		.get(function(req, res) {
-			// Handle file download here
-		})
+			File.findById(req.params.file_id, function(err, file) {
+				if (err) {
+					return res.send(err);
+				}
+
+				res.download(file.path);
+			})
+		});
+
+	router.route('/files/:file_id')
 
 		.put(function(req, res) {
 			// Handle file update here
@@ -109,6 +116,7 @@ module.exports = function(router) {
     			file.type = final_file.type;
     			file.lastModified = final_file.lastModifiedDate;
     			file.size = final_file.size;
+    			file.link = 'http://localhost:8080/api/' + file_id;
 
     			// If the file belongs to a registred user, we change the dir
     			var final_path;
