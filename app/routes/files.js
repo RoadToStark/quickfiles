@@ -37,17 +37,6 @@ module.exports = function(router) {
 			})
 		});
 
-	router.route('/:file_id')
-		.get(function(req, res) {
-			File.findById(req.params.file_id, function(err, file) {
-				if (err) {
-					return res.send(err);
-				}
-
-				res.download(file.path);
-			})
-		});
-
 	router.route('/files/:file_id')
 
 		.put(function(req, res) {
@@ -163,5 +152,18 @@ module.exports = function(router) {
 		form.parse(req);
 
 	}); 
+
+	router.route('/:file_id')
+	
+		.get(function(req, res) {
+			File.findById(req.params.file_id, function(err, file) {
+				if (err) {
+					return res.send(err);
+				}
+
+				res.download(file.path);
+			})
+		});
+
 
 };

@@ -10,6 +10,7 @@
 		"passport" : "~0.1.17", 		
     	"passport-local" : "~0.1.6",
     	"bcrypt-nodejs" : "latest",
-    	"formidable" : "latest"	    
+    	"formidable" : "latest",
+    	"nodemailer" : "~1.0"
 	}
 }

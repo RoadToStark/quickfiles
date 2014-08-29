@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var mailer = require('../lib/mailer');
 
 module.exports = function(router, passport) {
 
@@ -32,7 +33,8 @@ module.exports = function(router, passport) {
                 return res.send({success: false, message: info.message});
             }
 
-            return res.send({success: true, user: user});
+            mailer.sendRegistrationConfirmation(user, res);
+          
         })(req, res, next);
     });
 

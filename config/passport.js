@@ -1,5 +1,4 @@
 var LocalStrategy   = require('passport-local').Strategy;
-
 var User       		= require('../app/models/user');
 
 module.exports = function(passport) {
@@ -39,12 +38,13 @@ module.exports = function(passport) {
 
     				// save the user
                     newUser.save(function(err) {
-                        if (err)
+                        if (err) {
                             throw err;
+                        }
+
                         return done(null, newUser);
                     });
                 }
-
         });    
 
         });
