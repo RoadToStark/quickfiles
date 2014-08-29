@@ -5,10 +5,6 @@ angular.module('loginCtrl', [])
 
 		$scope.loginForm = {};
 
-		// loading variable to show the spinning loading icon
-		$scope.loading = true;
-
-
 		$scope.Log = function() {
 			$scope.loading = true;
 
@@ -68,9 +64,9 @@ angular.module('loginCtrl', [])
         };
         //$scope.GetToken();
 
-        $scope.Signup = function() {
+        $scope.Signup = function()
+         {
             $scope.loading = true;
-
             Signup.request($scope.signupForm)
                 .success(function(data) {
                     $scope.loading = false;

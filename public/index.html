@@ -2,16 +2,29 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>QuickFiles</title>
 
 		<!-- CSS -->
+		<link href="assets/semantic/packaged/css/semantic.min.css" rel="stylesheet" type="text/css"/>
+
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css"><!-- switching to pure -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+		
 
-		<!-- JS -->
+		<!-- JS -->	 
+		<script src="assets/js/helpers/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- shym must be called before angular -->
+
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular.min.js"></script> <!-- load angular -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-route.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-cookies.js"></script>
+
+		<!-- Jquery is for semantic UI, to discard later -->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="assets/semantic/packaged/javascript/semantic.min.js"></script>
+
+		<script src="assets/js/helpers/ng-file-upload/angular-file-upload.min.js"></script> <!-- angular-file-upload loaded after -->
 
 		<script src="assets/js/controllers/mainCtrl.js"></script> 
 		<script src="assets/js/services/fileService.js"></script> 
@@ -27,28 +40,29 @@
 		
 	</head>
 
-	<body class="container" ng-app="quickfiles">
-
-		<div class='navbar'>
-		 <div class='navbar-inner'>
-		    <div class='container-fluid'>
-		        <a class='brand' href="#">Quickfiles</a>
-		        <form class="navbar-search pull-right" ng-submit="Log()">
-		            <input type="text" class="span2" ng-model="loginForm.email" placeholder="Login">
-		            <input type="password" class="span2" ng-model="loginForm.password" placeholder="Password">
-		            <input type="submit" value="Login" class="btn"/>
-		        </form>
-		     </div>
-		  </div>
-		</div>
-
-		<div class="col-md-8 col-md-offset-2">
-			<!-- Main content and injected views -->
-			<div id="main">
-				<div ng-view></div>
+	<body ng-app="quickfiles">
+		<div class="ui large inverted menu">
+			<div class="left menu">
+				  <a class="active item" href="#">
+				    	<i class="home icon"></i> QuickFiles
+				  </a>
 			</div>
+		  	<div class="right menu">
+		    	<div class="item">
+		        	<a href="#signup" class="ui teal button">Sign Up</a>
+		    	</div>
 
+		    	<div class="item">
+		        	<a href="#login" class="ui teal button">Log in</a>
+		    	</div>
+		  	</div>
 		</div>
+			
+		<!-- Main content and injected views -->
+		<div id="main">
+			<div ng-view></div>
+		</div>
+
 	</body>
 </html>
 	
