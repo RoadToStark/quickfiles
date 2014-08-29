@@ -1,15 +1,17 @@
 var User = require('../models/user');
+var File = require('../models/files');
+
+var rmdir = require('rimraf');
 
 module.exports = function(router) {
 
-	// Users
 	router.route('/users')
 
 		// Routes to get all users
 		.get(function(req, res) {
 			User.find(function(err, users) {
 				if (err) {
-					res.send(err);
+					return res.send(err);
 				}
 
 				res.json(users);
@@ -22,7 +24,7 @@ module.exports = function(router) {
 		.get(function(req, res) {
 			User.findById(req.params.user_id, function(err, user) {
 				if (err) {
-					res.send(err);
+					return res.send(err);
 				}
 
 				res.json(user);
@@ -32,7 +34,7 @@ module.exports = function(router) {
 		.put(function(req, res) {
 			User.findById(req.params.user_id, function(err, user) {
 				if (err) {
-					res.send(err);
+					return res.send(err);
 				}
 
 				if (req.body.email) {
@@ -45,7 +47,7 @@ module.exports = function(router) {
 
 				user.save(function(err) {
 					if (err) {
-						res.send(err);
+						return res.send(err);
 					}
 
 					res.json({success: true, message: 'User successfuly updated', user: user});
@@ -53,15 +55,45 @@ module.exports = function(router) {
 			});
 		})
 
+		// We delete our user and his files if any
 		.delete(function(req, res) {
 			User.remove({
 				_id: req.params.user_id
 			}, function(err, user) {
 				if (err) {
-					res.send(err);
+					return res.send(err);
 				}
 
-				res.json({ success: true, message: 'User successfully deleted'});
+				if (!user) {
+					return res.json({ success: false, message: 'User not found'});
+				}
+
+				File.find({owner: req.params.user_id}, function(err, files) {
+					if (err) {
+						return res.send(err);
+					}
+
+					if (!files) {
+						return res.json({ success: true, message: 'User successfully deleted'});
+					}
+
+					rmdir('media/' + req.params.user_id + '/' , function(err){
+						if (err) {
+							return res.send(err);
+						}
+					});
+
+					for (var file in files) {
+						File.remove({ _id : file._id }, function(err, file) {
+							if (err) {
+								return res.send(err);
+							}
+						});
+					}
+
+					res.json({ success: true, message: 'User successfully deleted'});
+				});
+
 			});
 		});
 

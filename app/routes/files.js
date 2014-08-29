@@ -51,6 +51,10 @@ module.exports = function(router) {
 					res.send(err);
 				}
 
+				if (fs.existsSync(file.path)) {
+					fs.unlink(file.path);
+				}
+
 				res.json({ success: true, message: 'File successfully deleted'});
 			});
 		});
@@ -154,7 +158,7 @@ module.exports = function(router) {
 	}); 
 
 	router.route('/:file_id')
-	
+
 		.get(function(req, res) {
 			File.findById(req.params.file_id, function(err, file) {
 				if (err) {
