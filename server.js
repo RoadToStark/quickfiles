@@ -7,17 +7,14 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var passport	   = require('passport');
+var User 		   = require('./app/models/user');
 
 // configuration ===========================================
 	
-// config files
 var db = require('./config/db');
-
-// passport ================================================
 require('./config/passport')(passport); // pass passport for configuration
 
 var port = process.env.PORT || 8080; 
-// mongoose.connect(db.url); // connect to our mongoDB database (uncomment after you enter in your own credentials in config/db.js)
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
@@ -29,11 +26,31 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 // Database connection
 mongoose.connect(db.url);
 
-// routes ==================================================
+// Router config ==================================================
+
 var router = express.Router(); // Create instance of express router
-require('./app/routes/index')(router, passport); // configure our routes for users
+
+// We get the current user if any and set req.user 
+router.use(function(req, res, next) {
+	if (req.body.user) {
+		User.findOne(req.body.user._id, function(err, user) {
+			if (err) {
+				return res.send(err);
+			}
+
+			if (user) {
+				req.user = user;
+				next();
+			}
+		});
+	} else {
+		next();
+	}
+});
+
 app.use('/api', router); // Add api prefix
 
+require('./app/routes/index')(router, passport); // configure our routes for users
 
 // start app ===============================================
 app.listen(port);										

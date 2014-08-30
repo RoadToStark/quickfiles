@@ -1,13 +1,12 @@
 var User = require('../models/user');
 var File = require('../models/files');
-
 var rmdir = require('rimraf');
 
 module.exports = function(router) {
 
 	router.route('/users')
 
-		// Routes to get all users
+		// Route to get all users
 		.get(function(req, res) {
 			User.find(function(err, users) {
 				if (err) {
@@ -18,9 +17,9 @@ module.exports = function(router) {
 			});
 		});
 
+	// Routes for actions on a specific user
 	router.route('/users/:user_id')
 
-		// Routes for actions on a specific user
 		.get(function(req, res) {
 			User.findById(req.params.user_id, function(err, user) {
 				if (err) {
@@ -94,6 +93,21 @@ module.exports = function(router) {
 					res.json({ success: true, message: 'User successfully deleted'});
 				});
 
+			});
+		});
+
+	// Retrieve a user's files
+	router.route('/users/:user_id/files')
+
+		.get(function(req, res) {
+			File.find({
+				owner: req.params.user_id
+			}, function(err, files) {
+				if (err) {
+					return res.send(err);
+				}
+
+				return res.json(files);
 			});
 		});
 

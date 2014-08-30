@@ -12,10 +12,10 @@ module.exports = function(router) {
 
 			var new_file = new File();
 
-			if (req.body.user) {
-				new_file.owner = req.body.user._id;
+			if (req.user) {
+				new_file.owner = req.user._id;
 			} else {
-				new_file.owner = req.body.user._id;
+				new_file.owner = 0;
 			}
 
 			new_file.save(function(err) {
@@ -44,18 +44,26 @@ module.exports = function(router) {
 		})
 
 		.delete(function(req, res) {
-			File.remove({
-				_id: req.params.file_id
-			}, function(err, file) {
+			File.findOne({ _id: req.params.file_id }, function(err, file) {
 				if (err) {
-					res.send(err);
+					return res.send(err);
+				}
+
+				if (!file) {
+					return res.send({ success: false, message: 'No file to delete'});
 				}
 
 				if (fs.existsSync(file.path)) {
 					fs.unlink(file.path);
 				}
 
-				res.json({ success: true, message: 'File successfully deleted'});
+				File.remove({ _id: req.params.file_id }, function(err) {
+					if (err) {
+						return res.send(err);
+					}
+
+					res.json({ success: true, message: 'File successfully deleted'});
+				});
 			});
 		});
 
