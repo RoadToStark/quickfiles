@@ -98,7 +98,7 @@ Si erreur
     Content-Type : application/json
 ```
 
-**Paramètres (obligatoires) **
+**Paramètres (obligatoires)**
 ```
 {
         "user" : {
@@ -127,7 +127,7 @@ L'objet User correspondant
     Content-Type : application/json
 ```
 
-**Paramètres (obligatoires) **
+**Paramètres (obligatoires)**
 ```
 {
         "user" : {
