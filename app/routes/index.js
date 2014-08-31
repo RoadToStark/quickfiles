@@ -2,7 +2,7 @@ module.exports = function(router, passport) {
 
 	// Server routes ===========================================================
 	require('./auth')(router, passport); // configure our routes for auth
-	require('./users')(router); // configure our routes for users
+	require('./users')(router, isLoggedIn); // configure our routes for users
 	require('./files')(router); // configure our routes for files
 
 	// Client routes ===========================================================
@@ -12,3 +12,10 @@ module.exports = function(router, passport) {
 
 };
 
+var isLoggedIn = function isLoggedIn(req, res, next) {
+					if (req.isAuthenticated()) {
+						return next();
+					} else {
+						res.send(401);
+					}
+				}

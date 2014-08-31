@@ -7,12 +7,23 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var passport	   = require('passport');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+
+
 var User 		   = require('./app/models/user');
 
 // configuration ===========================================
 	
 var db = require('./config/db');
+
 require('./config/passport')(passport); // pass passport for configuration
+
+app.use(cookieParser()); // read cookies (needed for auth)
+// required for passport
+app.use(session({ secret: '3c4e23c92ad8843fec8e32459ddfb' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 var port = process.env.PORT || 8080; 
 
@@ -30,7 +41,7 @@ mongoose.connect(db.url);
 
 var router = express.Router(); // Create instance of express router
 
-// We get the current user if any and set req.user 
+/* We get the current user if any and set req.user 
 router.use(function(req, res, next) {
 	if (req.body.user) {
 		User.findOne(req.body.user._id, function(err, user) {
@@ -46,7 +57,7 @@ router.use(function(req, res, next) {
 	} else {
 		next();
 	}
-});
+});*/
 
 app.use('/api', router); // Add api prefix
 

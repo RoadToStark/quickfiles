@@ -2,7 +2,7 @@ var User = require('../models/user');
 var File = require('../models/files');
 var rmdir = require('rimraf');
 
-module.exports = function(router) {
+module.exports = function(router, isLoggedIn) {
 
 	router.route('/users')
 
@@ -20,7 +20,7 @@ module.exports = function(router) {
 	// Routes for actions on a specific user
 	router.route('/users/:user_id')
 
-		.get(function(req, res) {
+		.get(isLoggedIn, function(req, res) {
 			User.findById(req.params.user_id, function(err, user) {
 				if (err) {
 					return res.send(err);
@@ -30,7 +30,11 @@ module.exports = function(router) {
 			});
 		})
 
-		.put(function(req, res) {
+		.put(isLoggedIn, function(req, res) {
+			if (req.user._id != req.params.user_id) {
+				return res.status(401).send("You can't change another user informations !");
+			}
+
 			User.findById(req.params.user_id, function(err, user) {
 				if (err) {
 					return res.send(err);
@@ -99,7 +103,11 @@ module.exports = function(router) {
 	// Retrieve a user's files
 	router.route('/users/:user_id/files')
 
-		.get(function(req, res) {
+		.get(isLoggedIn, function(req, res) {
+			if (req.user._id != req.params.user_id) {
+				return res.status(401).send('These files do not belong to you !');
+			}
+
 			File.find({
 				owner: req.params.user_id
 			}, function(err, files) {
@@ -110,6 +118,9 @@ module.exports = function(router) {
 				return res.json(files);
 			});
 		});
-
 };
+
+
+
+
 

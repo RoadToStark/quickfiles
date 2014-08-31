@@ -12,6 +12,8 @@
     	"bcrypt-nodejs" : "latest",
     	"formidable" : "latest",
     	"nodemailer" : "~1.0",
-    	"rimraf": "2.1"
+    	"rimraf": "2.1",
+    	"cookie-parser": "~1.0.0",
+    	"express-session": "~1.0.0"		
 	}
 }
