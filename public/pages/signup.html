@@ -1,23 +1,24 @@
+<div class="row">
+   <form role="signup" ng-submit="Signup()">
+        <div class="alert alert-danger alert-dismissible" ng-show="error" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Sorry, but there was an error signing you up : </strong> {{ error }}
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input ng-model="signupForm.email" name="email" class="form-control" placeholder="Enter your email" type="text" />
+        </div>
 
-<div class="container"> 
-  	<h1>Register Now</h1>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input ng-model="signupForm.password" name="password" class="form-control" type="password" placeholder="Choose a strong password" />
+        </div>
 
-  	<form class="ui form segment" ng-submit="Signup()">   
+        <input type="submit" class="btn center-block btn-primary btn-large" value="Sign me up now !" />
 
-    	<div class="field">
-      		<label for="Email">Email</label>
-      		<input ng-model="signupForm.email" id="Email" placeholder="Email" type="text">
-    	</div>
-
-   		<div class="field">
-      		<label for="Password">Password</label>
-      		<input ng-model="signupForm.password" id="Password" type="password">
-    	</div>
-
-    	<button type="submit" class="ui blue button">Submit</button>
-
-    	<div class="ui inverted dimmer" ng-class="{true: 'active', false: 'disabled'}[loading]">
-  			<div class="ui text loader">Registering you now :)</div>
-	    </div>
-  </form>    
+    </form> 
 </div>
+
+
+
+

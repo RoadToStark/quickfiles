@@ -1,0 +1,22 @@
+{
+  "name": "quickfiles",
+  "version": "0.1",
+  "homepage": "https://github.com/RoadToStark/quickfiles",
+  "authors": [
+    "Lucas Bédout <lucas.bedout@free.fr>"
+  ],
+  "description": "Instant upload",
+  "main": "server.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0"
+  }
+}

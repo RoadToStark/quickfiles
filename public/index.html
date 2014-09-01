@@ -6,12 +6,7 @@
 		<title>QuickFiles</title>
 
 		<!-- CSS -->
-		<link href="assets/semantic/packaged/css/semantic.min.css" rel="stylesheet" type="text/css"/>
-
-		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css"><!-- switching to pure -->
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-		
+		<link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
 
 		<!-- JS -->	 
 		<script src="assets/js/helpers/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- shym must be called before angular -->
@@ -19,10 +14,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular.min.js"></script> <!-- load angular -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-route.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-cookies.js"></script>
-
-		<!-- Jquery is for semantic UI, to discard later -->
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="assets/semantic/packaged/javascript/semantic.min.js"></script>
 
 		<script src="assets/js/helpers/ng-file-upload/angular-file-upload.min.js"></script> <!-- angular-file-upload loaded after -->
 
@@ -41,28 +32,36 @@
 	</head>
 
 	<body ng-app="quickfiles">
-		<div class="ui large inverted menu">
-			<div class="left menu">
-				  <a class="active item" href="#">
-				    	<i class="home icon"></i> QuickFiles
-				  </a>
-			</div>
-		  	<div class="right menu">
-		    	<div class="item">
-		        	<a href="#signup" class="ui teal button">Sign Up</a>
-		    	</div>
-
-		    	<div class="item">
-		        	<a href="#login" class="ui teal button">Log in</a>
-		    	</div>
-		  	</div>
-		</div>
+		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+		    <div class="container-fluid">
+			    <div class="navbar-header">
+			      	<a class="navbar-brand" href="#">Quickfiles</a>
+			    </div>
+				<ul class="nav navbar-nav navbar-right" ng-hide="window.user">
+						<li><a href="#signup">Signup</a></li>
+				        <li><a href="#login">Login</a></li>
+			    </ul>
+			    <div class="nav navbar-nav navbar-right" ng-show="window.user">
+						Hello, {{ $window.user.email }}
+				</div>
+					
+			</div><!-- /.container-fluid -->
+		</nav>
 			
 		<!-- Main content and injected views -->
 		<div id="main">
-			<div ng-view></div>
+			<div class="container">
+				<div class="alert alert-dismissible" ng-class="'alert-' + alert.type" ng-show="alert">
+	                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	                <strong class="center-block">{{ alert.message }}</strong>
+	            </div>
+				<div ng-view></div>
+			</div>
 		</div>
 
+	<!-- Jquery -->
+    <script src="assets/jquery/dist/jquery.min.js"></script>
+	<script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
 	</body>
 </html>
 	

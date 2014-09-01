@@ -1,20 +1,24 @@
 
 angular.module('loginCtrl', [])
 
-	.controller('loginController', function($scope, $http, Login, Signup, $location) {
+	.controller('loginController', function($scope, $http, Login, Signup, $rootScope, $location) {
 
 		$scope.loginForm = {};
 
 		$scope.Log = function() {
-			$scope.loading = true;
 
 			Login.log($scope.loginForm)
 				.success(function(data) {
-					$scope.loading = false;
-					document.location.href = '/';
+					$rootScope.alert = {
+                        type: 'success',
+                        message: 'Login successful !'
+                    }
+
+                    window.user = data;
+
+					$location.url = '/';
 				})
 				.error(function(data) {
-					console.log(data);
 					$scope.errormsg = 'Mauvais Identifiant/Mot de passe';
 				});
 		};
@@ -66,15 +70,20 @@ angular.module('loginCtrl', [])
 
         $scope.Signup = function()
          {
-            $scope.loading = true;
             Signup.request($scope.signupForm)
                 .success(function(data) {
-                    $scope.loading = false;
-                    document.location.href = '/';
+
+                    $rootScope.alert = {
+                        type: 'success',
+                        message: 'We are proud to announce that we just successfully signed you up !'
+                    }
+
+                    window.user = data.user;
+
+                    $location.url('/');
                 })
                 .error(function(data) {
-                    console.log(data);
-                    $scope.errormsg = 'Mauvais Identifiant/Mot de passe';
+                    $scope.error = data.error;
                 });
 
         };

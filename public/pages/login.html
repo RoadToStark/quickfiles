@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+       <form role="login" ng-submit="Log()">
+            <div class="alert alert-danger alert-dismissible" ng-show="error" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>Sorry, but there was an error logging you in : </strong> {{ error }}
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input ng-model="loginForm.email" name="email" class="form-control" placeholder="Enter your email" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input ng-model="loginForm.password" name="password" class="form-control" type="password" placeholder="Enter your strong password" />
+            </div>
+
+            <input type="submit" class="btn center-block btn-primary btn-large" value="Log in now !" />
+
+        </form> 
+        <p>Forgot your password ? <a href="#reset">Reset it !</a></p>
+    </div>
+</div>
+
+
+

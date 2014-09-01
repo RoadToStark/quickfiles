@@ -12,12 +12,29 @@ module.exports = function(router, passport) {
 				});
 
 	// Registration
-	router.post('/signup', 
-				passport.authenticate('local-login'), function(req, res) {
-					mailer.sendRegistrationConfirmation(req.user, res);
-					return res.send(req.user);
-				});
+	router.post('/signup', function (req, res, next) {
+		passport.authenticate('local-signup', function(err, user, info) {
+			if (err) {
+				return res.send(err);
+			}
 
+			if (!user) {
+				return res.status(422).send({ error : info.message });
+			}
+
+			// We set the user in the request here
+			req.logIn(user, function(err) {
+			    if (err) { 
+			    	return res.send(err); 
+			    }
+
+			    mailer.sendRegistrationConfirmation(req.user, res);
+			});
+	
+		})(req, res, next);
+
+	});
+	
 	router.get('/logout', function(req, res) {
 		req.logout();
 		return res.send({success: true});

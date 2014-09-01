@@ -1,7 +1,7 @@
 // public/js/controllers/mainCtrl.js
 angular.module('mainCtrl', ['angularFileUpload'])
 	// inject the file service into our controller
-	.controller('mainController', function($scope, $http, File) {
+	.controller('mainController', function($scope, $rootScope, $http, File) {
 		// object to hold all the data for the new file form
 		$scope.FileData = {};
 
