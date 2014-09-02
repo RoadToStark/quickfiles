@@ -5,16 +5,16 @@ angular.module('loginCtrl', [])
 
 		$scope.loginForm = {};
 
-		$scope.Log = function() {
+		$scope.Login = function() {
 
-			Login.log($scope.loginForm)
+			Login.signin($scope.loginForm)
 				.success(function(data) {
 					$rootScope.alert = {
                         type: 'success',
                         message: 'Login successful !'
                     }
 
-                    window.user = data;
+                    window.user = data.user;
 
 					$location.url = '/';
 				})

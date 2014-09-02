@@ -3,7 +3,7 @@ loginService = angular.module('loginService', [])
 	loginService.factory('Login', function($http) {
 
 		return {
-			log : function(loginForm) {
+			signin : function(loginForm) {
 				return $http({
 					method: 'POST',
 					url: '/api/login',

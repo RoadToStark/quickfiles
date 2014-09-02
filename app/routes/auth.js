@@ -8,7 +8,7 @@ module.exports = function(router, passport) {
 	// Authentication
 	router.post('/login', 
 				passport.authenticate('local-login'), function(req, res) {
-					return res.send(req.user);
+					return res.send({success: true, user: req.user});
 				});
 
 	// Registration
@@ -28,7 +28,9 @@ module.exports = function(router, passport) {
 			    	return res.send(err); 
 			    }
 
-			    mailer.sendRegistrationConfirmation(req.user, res);
+			    res.send({success: true, user: user});
+
+			    return mailer.sendRegistrationConfirmation(req.user, res);
 			});
 	
 		})(req, res, next);

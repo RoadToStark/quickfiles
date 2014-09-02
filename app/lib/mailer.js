@@ -23,13 +23,7 @@ var Mailer = {
 		};
 
 		// send mail with defined transport object
-		transporter.sendMail(mailOptions, function(err, info){
-		    if (err){
-		        return res.send(err);
-		    } else{
-		        return res.send({success: true, user: user});
-		    }
-		});
+		transporter.sendMail(mailOptions);
 	}
 };
 
